@@ -1,0 +1,24 @@
+{
+  "name": "card-ocr",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tailwindcss -i ./src/style.css -o ./public/style.css --watch & bun run --hot src/index.tsx",
+    "start": "bun run src/index.tsx",
+    "css:build": "tailwindcss -i ./src/style.css -o ./public/style.css --minify",
+    "css:watch": "tailwindcss -i ./src/style.css -o ./public/style.css --watch",
+    "typecheck": "tsc --noEmit",
+    "dev:start": "scripts/dev-start.sh",
+    "dev:stop": "scripts/dev-stop.sh"
+  },
+  "dependencies": {
+    "hono": "^4.13.13"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "@types/bun": "latest",
+    "tailwindcss": "4.3.3",
+    "typescript": "7.0.2"
+  }
+}
