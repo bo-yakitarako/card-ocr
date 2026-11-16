@@ -10,3 +10,5 @@ dist
 .DS_Store
 .fallow
 .cloudflare
+.dev-server.pid
+.dev-server.log

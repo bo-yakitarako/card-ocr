@@ -58,6 +58,8 @@ For non-skill agents, treat the task map below as the local onboarding source: r
 
 ブラウザ実測が必要な視覚的変更は`pnpm browser`（`open`/`eval`/`screenshot`。`AGENT_BROWSER_ARGS=--no-sandbox`込み）で確認する。
 
+バックグラウンドのdevサーバーは`pnpm dev`ではなく`scripts/dev.sh`経由にすること（`start`/`stop`/`restart`/`status`/`logs`）。setsid+PIDファイルで管理され、exec境界を越えても生存し確実に停止できる。
+
 React Doctorのコマンド:
 
 - フルスキャン: `pnpm exec react-doctor --verbose`（または `pnpm doctor`）
