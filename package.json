@@ -1,0 +1,31 @@
+{
+  "name": "card-ocr",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vp dev",
+    "build": "vp build",
+    "preview": "vp preview",
+    "doctor": "react-doctor",
+    "browser": "AGENT_BROWSER_ARGS=--no-sandbox agent-browser"
+  },
+  "dependencies": {
+    "@stylexjs/stylex": "^0.19.1",
+    "hono": "^4.11.9",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@stylexjs/unplugin": "^0.19.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@void/react": "1.9.1",
+    "agent-browser": "0.41.2",
+    "fallow": "^3.43.1",
+    "react-doctor": "0.9.22",
+    "typescript": "^7.0.2",
+    "vite": "catalog:",
+    "vite-plus": "catalog:",
+    "void": "1.9.1"
+  }
+}

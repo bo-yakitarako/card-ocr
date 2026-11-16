@@ -1,0 +1,17 @@
+/*
+ * StyleX の生成 CSS は、ビルド時にこのファイルの末尾へ追加されます。
+ * （Vite が CSS アセットを出力するためのアンカー）
+ */
+:root {
+  -webkit-text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
