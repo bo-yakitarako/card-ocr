@@ -33,5 +33,6 @@ scripts/dev.sh stop
 
 ## 補足
 
+- 既にこのスクリプト経由で起動中なら、別ポートで立て直さず既存のURLをそのまま使うこと（`status`で確認。`start`は冪等）
 - 起動中のURL・PIDは `scripts/dev.sh status`、ログは `scripts/dev.sh logs` で確認できる
 - ブラウザでの確認は `pnpm browser open <URL>` → `eval` / `screenshot`
