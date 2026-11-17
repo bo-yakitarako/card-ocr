@@ -79,6 +79,7 @@ Claude CodeとCursorではStopフックがターン終了時にReact Doctorス�
 - プロジェクト内のimportは`@/`（`src/`のエイリアス、`vite.config.ts`の`resolve.alias` + `tsconfig.json`の`paths`で定義）を使った絶対パスで書く。`src/`・`pages/`・`middleware/`・`routes/`・`db/`・`crons/`・`queues/`では相対import（`./`・`../`）をlintで禁止済み。`lint/`のような対象外でも`../`は禁止。共有コードは`src/`に置くこと。
 - 依存のインストール・追加・更新は`sfw`を前置して実行する（`sfw pnpm install`、`sfw pnpm add <pkg>`）。Socket Firewallが確定マルウェアをネットワーク層で遮断する。miseで`npm:sfw`として提供済み。
 - コーディングでは`ponytail`スキルの最小変更原則（必要十分・既存再利用・検証は削らない）に従う。変更のレビューは`/ponytail-review`、リポジトリ全体の棚卸しは`/ponytail-audit`。
+- pstackスキル（`.agents/skills/principle-*`等、明示呼び出し型）: バグ修正は`tdd`、危ない差分は`blast-radius`、実装後の検証は`principle-prove-it-works`、TS編集時は`typescript-best-practices`等を目的に応じて使う。
 - テスト: 単体はVitest（`pnpm test`＝`vp test`）。変更のテスト品質は`pnpm mutator --since HEAD`で計測（CIゲートではなくリファクタリング指標、生き残りを潰す流れは`mutation-test-loop`スキル）。E2Eは`pnpm test:e2e`（要`scripts/dev.sh`起動済み＋`APP_URL`）。agentステップはCodexのChatGPTログインをACP経由で使う（`e2e.config.ts`参照、外部キー不要）。Devinログインも試せるが`devin acp`はe2eのstepツール制約で`POLICY_DENIED`になるため現在不可。
 - 環境変数: `env/.env.<name>`をdotenvxで暗号化管理（環境ごとに別鍵、秘密鍵は`env/.env.keys.<name>`で分離・gitignore済み）。値の追加・更新は`dotenvx set KEY value -f env/.env.<name>`、注入して実行は`dotenvx run -f env/.env.<name> -fk env/.env.keys.<name> -- <cmd>`。平文の`.env`は作らない。`dev`/`build`/`preview`/`test`/`test:e2e`は`.env.development`注入済み、各`:prd`付きスクリプトは`.env.production`を注入する。
 
