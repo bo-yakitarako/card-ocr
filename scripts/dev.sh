@@ -134,6 +134,7 @@ cmd_status() {
       grep -qxF "$opid" <<<"$managed_tree" || extra="$extra $opid"
     done <<<"$orphans"
     [[ -n "${extra// /}" ]] && echo "warn: unmanaged dev processes also running:${extra}" >&2
+    return 0
   elif [[ -n "$orphans" ]]; then
     echo "not running (but unmanaged dev processes found: $(echo "$orphans" | tr '\n' ' ') — 'stop' will clean them)" >&2
     exit 1

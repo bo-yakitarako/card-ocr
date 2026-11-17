@@ -4,6 +4,10 @@ node = "26.13.1"
 "npm:@dotenvx/dotenvx" = "2.38.2"
 pnpm = "12.21.0"
 
+[tasks.dev]
+description = "devサーバーのデーモン制御（引数はscripts/dev.shへ透過。無引数＝toggle。start/stop/restart/status/logs/toggle）"
+run = "scripts/dev.sh"
+
 # env/ 配下の暗号化envファイルを操作するタスク
 [tasks."env:encrypt"]
 description = "env/.env.development と env/.env.production を公開鍵で暗号化する"
