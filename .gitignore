@@ -6,6 +6,8 @@ dist
 .env
 .env.*
 !.env.example
+# env/ 配下の暗号化済みenvファイルはdotenvx運用のためコミット対象
+!env/.env.*
 *.tsbuildinfo
 .DS_Store
 .fallow
@@ -13,6 +15,9 @@ dist
 .dev-server.pid
 .dev-server.log
 .mutator/
+.env.keys
+.env.keys.*
+.env*local
 node_modules/
 .e2e/results/
 .e2e/cache/

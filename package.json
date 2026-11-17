@@ -3,13 +3,18 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vp dev",
-    "build": "vp build",
-    "preview": "vp preview",
+    "dev": "dotenvx run -f env/.env.development -fk env/.env.keys.development -- vp dev",
+    "dev:prd": "dotenvx run -f env/.env.production -fk env/.env.keys.production -- vp dev",
+    "build": "dotenvx run -f env/.env.development -fk env/.env.keys.development -- vp build",
+    "build:prd": "dotenvx run -f env/.env.production -fk env/.env.keys.production -- vp build",
+    "preview": "dotenvx run -f env/.env.development -fk env/.env.keys.development -- vp preview",
+    "preview:prd": "dotenvx run -f env/.env.production -fk env/.env.keys.production -- vp preview",
     "doctor": "react-doctor",
     "browser": "AGENT_BROWSER_ARGS=--no-sandbox agent-browser",
-    "test": "vp test",
-    "test:e2e": "e2e run",
+    "test": "dotenvx run -f env/.env.development -fk env/.env.keys.development -- vp test",
+    "test:prd": "dotenvx run -f env/.env.production -fk env/.env.keys.production -- vp test",
+    "test:e2e": "dotenvx run -f env/.env.development -fk env/.env.keys.development -- e2e run",
+    "test:e2e:prd": "dotenvx run -f env/.env.production -fk env/.env.keys.production -- e2e run",
     "mutator": "mutator"
   },
   "dependencies": {

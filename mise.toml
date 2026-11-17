@@ -1,4 +1,14 @@
 [tools]
 node = "26.13.1"
 "npm:sfw" = "2.0.6"
+"npm:@dotenvx/dotenvx" = "2.38.2"
 pnpm = "12.21.0"
+
+# env/ 配下の暗号化envファイルを操作するタスク
+[tasks."env:encrypt"]
+description = "env/.env.development と env/.env.production を公開鍵で暗号化する"
+run = "dotenvx encrypt -f env/.env.development && dotenvx encrypt -f env/.env.production"
+
+[tasks."env:decrypt"]
+description = "env/配下の両envファイルを環境別の秘密鍵で平文に復号する（確認後はenv:encryptで再暗号化すること）"
+run = "dotenvx decrypt -f env/.env.development -fk env/.env.keys.development && dotenvx decrypt -f env/.env.production -fk env/.env.keys.production"
