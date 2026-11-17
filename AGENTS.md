@@ -77,6 +77,7 @@ Claude CodeとCursorではStopフックがターン終了時にReact Doctorス�
 - プロジェクト内のドキュメントやコメントは日本語で書く（`README.md`、ガイド、ルールのドキュメント）。ツール生成のエージェント向け指示ブロックは英語のままでよい。
 - `AGENTS.md`は100行以内に抑える。詳細は各ドキュメント（`lint/README.md`、`node_modules/*/docs/`等）に書き、ここには要点と参照先だけを置く。
 - プロジェクト内のimportは`@/`（`src/`のエイリアス、`vite.config.ts`の`resolve.alias` + `tsconfig.json`の`paths`で定義）を使った絶対パスで書く。`src/`・`pages/`・`middleware/`・`routes/`・`db/`・`crons/`・`queues/`では相対import（`./`・`../`）をlintで禁止済み。`lint/`のような対象外でも`../`は禁止。共有コードは`src/`に置くこと。
+- 依存のインストール・追加・更新は`sfw`を前置して実行する（`sfw pnpm install`、`sfw pnpm add <pkg>`）。Socket Firewallが確定マルウェアをネットワーク層で遮断する。miseで`npm:sfw`として提供済み。
 
 ## lintで再発防止する運用
 
