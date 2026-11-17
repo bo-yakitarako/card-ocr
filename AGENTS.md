@@ -78,6 +78,7 @@ Claude CodeとCursorではStopフックがターン終了時にReact Doctorス�
 - `AGENTS.md`は100行以内に抑える。詳細は各ドキュメント（`lint/README.md`、`node_modules/*/docs/`等）に書き、ここには要点と参照先だけを置く。
 - プロジェクト内のimportは`@/`（`src/`のエイリアス、`vite.config.ts`の`resolve.alias` + `tsconfig.json`の`paths`で定義）を使った絶対パスで書く。`src/`・`pages/`・`middleware/`・`routes/`・`db/`・`crons/`・`queues/`では相対import（`./`・`../`）をlintで禁止済み。`lint/`のような対象外でも`../`は禁止。共有コードは`src/`に置くこと。
 - 依存のインストール・追加・更新は`sfw`を前置して実行する（`sfw pnpm install`、`sfw pnpm add <pkg>`）。Socket Firewallが確定マルウェアをネットワーク層で遮断する。miseで`npm:sfw`として提供済み。
+- コーディングでは`ponytail`スキルの最小変更原則（必要十分・既存再利用・検証は削らない）に従う。変更のレビューは`/ponytail-review`、リポジトリ全体の棚卸しは`/ponytail-audit`。
 
 ## lintで再発防止する運用
 
