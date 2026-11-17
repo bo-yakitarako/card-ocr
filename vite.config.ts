@@ -42,7 +42,6 @@ export default defineConfig({
   },
   staged: {
     '*': 'vp check --fix',
-    'lint/**/*.test.mjs': 'vp test run',
   },
   lint: {
     ignorePatterns: [

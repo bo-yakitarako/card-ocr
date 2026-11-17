@@ -7,7 +7,10 @@
     "build": "vp build",
     "preview": "vp preview",
     "doctor": "react-doctor",
-    "browser": "AGENT_BROWSER_ARGS=--no-sandbox agent-browser"
+    "browser": "AGENT_BROWSER_ARGS=--no-sandbox agent-browser",
+    "test": "vp test",
+    "test:e2e": "e2e run",
+    "mutator": "mutator"
   },
   "dependencies": {
     "@stylexjs/stylex": "^0.19.1",
@@ -16,16 +19,23 @@
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
+    "@agentclientprotocol/codex-acp": "^2.6.0",
+    "@e2e-dev/acp": "0.1.2",
+    "@e2e-dev/web": "^0.15.5",
+    "@mizchi/mutator": "0.2.0",
     "@stylexjs/unplugin": "^0.19.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@void/react": "1.9.1",
     "agent-browser": "0.41.2",
+    "ai": "^7.0.0",
+    "e2e": "0.23.0",
     "fallow": "^3.43.1",
     "react-doctor": "0.9.22",
     "typescript": "^7.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:",
-    "void": "1.9.1"
+    "void": "1.9.1",
+    "zod": "^4.1.8"
   }
 }

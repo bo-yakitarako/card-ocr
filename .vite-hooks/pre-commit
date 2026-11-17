@@ -9,6 +9,20 @@ elif [ -x "./node_modules/.bin/vp" ]; then
   "./node_modules/.bin/vp" staged || exit 1
 fi
 
+# Unit tests + mutation score on the change (cheap: diff-scoped, cached).
+run_bin() {
+  bin="$1"
+  shift
+  if [ -x "./node_modules/.bin/$bin" ]; then
+    "./node_modules/.bin/$bin" "$@"
+    return
+  fi
+  command -v "$bin" >/dev/null 2>&1 && "$bin" "$@"
+}
+
+run_bin vp test run || exit 1
+run_bin mutator --since HEAD --fail-on-survived || exit 1
+
 # react-doctor hook start
 react_doctor_scan_staged_files() {
   if [ -x "./node_modules/.bin/react-doctor" ]; then

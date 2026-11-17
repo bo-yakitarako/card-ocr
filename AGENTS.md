@@ -79,6 +79,7 @@ Claude CodeとCursorではStopフックがターン終了時にReact Doctorス�
 - プロジェクト内のimportは`@/`（`src/`のエイリアス、`vite.config.ts`の`resolve.alias` + `tsconfig.json`の`paths`で定義）を使った絶対パスで書く。`src/`・`pages/`・`middleware/`・`routes/`・`db/`・`crons/`・`queues/`では相対import（`./`・`../`）をlintで禁止済み。`lint/`のような対象外でも`../`は禁止。共有コードは`src/`に置くこと。
 - 依存のインストール・追加・更新は`sfw`を前置して実行する（`sfw pnpm install`、`sfw pnpm add <pkg>`）。Socket Firewallが確定マルウェアをネットワーク層で遮断する。miseで`npm:sfw`として提供済み。
 - コーディングでは`ponytail`スキルの最小変更原則（必要十分・既存再利用・検証は削らない）に従う。変更のレビューは`/ponytail-review`、リポジトリ全体の棚卸しは`/ponytail-audit`。
+- テスト: 単体はVitest（`pnpm test`＝`vp test`）。変更のテスト品質は`pnpm mutator --since HEAD`で計測（CIゲートではなくリファクタリング指標、生き残りを潰す流れは`mutation-test-loop`スキル）。E2Eは`pnpm test:e2e`（要`scripts/dev.sh`起動済み＋`APP_URL`）。agentステップはCodexのChatGPTログインをACP経由で使う（`e2e.config.ts`参照、外部キー不要）。Devinログインも試せるが`devin acp`はe2eのstepツール制約で`POLICY_DENIED`になるため現在不可。
 
 ## lintで再発防止する運用
 
