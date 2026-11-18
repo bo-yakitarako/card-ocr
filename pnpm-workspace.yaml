@@ -14,3 +14,10 @@ peerDependencyRules:
 catalog:
   vite: npm:@voidzero-dev/vite-plus-core@1.6.0
   vite-plus: 1.6.0
+minimumReleaseAgeExclude:
+  - '@mizchi/mutator-core@0.4.0'
+  - '@mizchi/mutator-jest@0.4.0'
+  - '@mizchi/mutator-playwright@0.4.0'
+  - '@mizchi/mutator-typecheck@0.4.0'
+  - '@mizchi/mutator-vitest@0.4.0'
+  - '@mizchi/mutator@0.4.0'

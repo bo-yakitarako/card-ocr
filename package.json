@@ -27,7 +27,7 @@
     "@agentclientprotocol/codex-acp": "^2.6.0",
     "@e2e-dev/acp": "0.1.2",
     "@e2e-dev/web": "^0.15.5",
-    "@mizchi/mutator": "0.2.0",
+    "@mizchi/mutator": "0.4.0",
     "@stylexjs/unplugin": "^0.19.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
