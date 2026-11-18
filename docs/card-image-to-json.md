@@ -28,14 +28,14 @@
 | #   | 構成                            | 座標         | シンボル判定 | 日本語精度    | 概算/千枚                       | 画像送信   | 実装負荷 |
 | --- | ------------------------------- | ------------ | ------------ | ------------- | ------------------------------- | ---------- | -------- |
 | A   | `devin -p` SWE-2直読み          | LLM内部      | LLM内部      | ○〜◎          | ¥0（定額内）                    | サーバーへ | 最小     |
-| B-1 | **manga-ocr+det（WASM）→ Jev**  | ○（det由来） | Jev（画像）  | ○〜◎          | ≈¥0（Jev入力$0.042/1M・誤差級） | 圧縮画像   | 大       |
+| B-1 | **RapidOCR単体（WASM）→ Jev**   | ○            | Jev（画像）  | ○〜◎          | ≈¥0（Jev入力$0.042/1M・誤差級） | 圧縮画像   | 中       |
 | B-2 | Cloud Vision → Jev              | ◎            | Jev（画像）  | ◎             | ~$1.5＋Jev僅少                  | あり       | 小       |
 | B-3 | Datalab API (Chandra 2.7) → Jev | ◎            | 同上         | ◎             | $4〜10                          | あり       | 小       |
 | B-4 | LlamaParse (OCRia-1.5) → Jev    | ◎            | 同上         | ?（文書特化） | $4.5〜15                        | あり       | 小       |
 | B-5 | Liquid `lfm3-vl-2b` 1発 → Jev   | △(grounding) | 同上         | ?             | 数円?（トークン従量）           | あり       | 最小     |
 
 - **A（本命基準線）**: 実装ゼロで理想出力の基準を作る
-- **B-1（本命構成）**: クライアントOCRで画像を端末内処理。限界コスト最安。manga-ocrは認識専用なので別途detector（RapidOCR-det等）で文字領域を検出する
+- **B-1（本命構成）**: クライアントOCRで画像を端末内処理。限界コスト最安。RapidOCRはdet+rec一体型のためcrop処理不要で、`画像 → spans{テキスト, 座標, conf}` がライブラリ1つで得られる（Apache 2.0）
 - **B-2〜B-4**: ホストOCRの精度ベンチ。クライアントOCRの精度が足りない場合の代替
 - **B-5**: ワンコール完結の実験枠
 
@@ -51,9 +51,17 @@ TypeSafe AIの「System One」分類専用モデル（`typesafe/jev-1.14`、画�
 
 ## 候補エンジンの注意点
 
-- **ライセンス**: Datalab系（Chandra/Indra/Surya）とLiquid LFM系はself-hostの重み利用に収入制限あり（Chandra $2M、Indra $20M、LFM $10M）。当社規模ではself-host不可のため**ホストAPI利用のみ**が対象。manga-ocrとTesseract/RapidOCRはApache 2.0で制約なし
-- **座標**: manga-ocr単体は座標を出さない（detector併用必須）。LFM3-VLのgrounding座標は生成値で精度不確か。Datalab/LlamaParse/Vision/RapidOCRはネイティブにbbox+confを返す
+- **ライセンス**: Datalab系（Chandra/Indra/Surya）とLiquid LFM系はself-hostの重み利用に収入制限あり（Chandra $2M、Indra $20M、LFM $10M）。当社規模ではself-host不可のため**ホストAPI利用のみ**が対象。RapidOCR/TesseractはApache 2.0で制約なし
+- **座標**: LFM3-VLのgrounding座標は生成値で精度不確か。Datalab/LlamaParse/Vision/RapidOCRはネイティブにbbox+confを返す
 - **コスト感**: Jevは入力トークンのみ課金（$0.042/1M）で1枚あたりほぼ誤差級。無料枠はDatalab ~$20/月、LlamaParse 10k cr/月、Vision 月千枚、Liquid $2 cr
+
+## 却下した候補
+
+- **テンプレ座標crop**: ポケカは世代・特殊カードでレイアウトが変わり、決め打ち座標は安全に切れない。cropはdetの検出結果由来なら許容だが、レイアウト仮定としては不採用
+- **manga-ocr（単体での採用）**: 認識専用（recのみ）で検出機能を持たないため、det→crop→recの分業を自前で組む必要がある。「crop操作を自前で書かない」方針に反し、det一体型のRapidOCRに一本化。日本語精度の上積みが必要になった場合のみ再検討
+- **ChromeScreenAI**: Chrome内部のオンデバイスOCR（PDF/リーディングモード用）だがWebページから呼べるAPIが存在せず、DLL直叩きは非公式・非サポートで実用不可
+- **Indra OCR**: ブラウザWASM移植があり魅力的だったが、重みライセンスが「売上/調達$20M超は不可」で当社規模では使えない
+- **Chandra/LFM self-host**: 同上の収入制限により重みのself-hostは不可。ホストAPI利用は問題なし（上記レーン表で扱う）
 
 ## 評価方法
 
