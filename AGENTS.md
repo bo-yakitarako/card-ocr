@@ -50,7 +50,7 @@ For non-skill agents, treat the task map below as the local onboarding source: r
 
 チェックはこの順で実行すること（安い修正から先に）:
 
-1. **fmt + lint + 型:** `pnpm exec vp check --fix`（フォーマットとlintを自動修正）。確認のみなら `pnpm exec vp check`。
+1. **fmt + lint + 型:** `pnpm exec vp check --fix`（フォーマットとlintを自動修正）。確認のみなら `pnpm exec vp check`。型チェックは`vite.config.ts`の`lint.options.typeAware`/`typeCheck`経由でtsrsが実行（oxlintが自動検出）。
 2. **React Doctor** は `.tsx`/Reactコードを変更した後: `pnpm exec react-doctor --verbose --scope changed` — スコア（0〜100）を下げる退行はコミット前に直すこと。`npx react-doctor@latest`ではなくローカルインストール版のCLIを使う。
 3. **Fallow** は `git commit`/`git push` の前: 上のauditブロックを参照。
 

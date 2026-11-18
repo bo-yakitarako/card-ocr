@@ -44,6 +44,9 @@ export default defineConfig({
     '*': 'vp check --fix',
   },
   lint: {
+    // tsrs（TSのRust移植）をバックエンドにlint内で型チェックも実行する。
+    // oxlint 1.92+ は tsrs パッケージを自動検出する（両方立てるとtsrsが優先）。
+    options: { typeAware: true, typeCheck: true },
     ignorePatterns: [
       'dist/**',
       '.cloudflare/**',
