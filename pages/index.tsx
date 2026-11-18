@@ -120,7 +120,7 @@ export default function HomePage() {
         <p {...stylex.props(styles.note)}>
           <code {...stylex.props(styles.code)}>pages/*.server.ts</code>、{' '}
           <code {...stylex.props(styles.code)}>routes/</code>、 <code {...stylex.props(styles.code)}>void/db</code>{' '}
-          を追加すると、フルスタック機能に広がっちゃうもんね
+          を追加すると、フルスタック機能に広がる
         </p>
       </div>
     </main>
