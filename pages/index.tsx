@@ -1,4 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
+import { Button } from '@/ui/button';
 import '@/styles.css';
 
 const styles = stylex.create({
@@ -76,6 +77,12 @@ const styles = stylex.create({
     fontFamily: '"SFMono-Regular", ui-monospace, Menlo, Consolas, monospace',
     fontSize: '0.9em',
   },
+  buttonRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    marginBottom: '16px',
+  },
   note: {
     margin: 0,
     paddingTop: '20px',
@@ -116,6 +123,13 @@ export default function HomePage() {
           </li>
           <li>本番ビルドでは CSS が自動でアセットにまとめられる</li>
         </ul>
+
+        <div {...stylex.props(styles.buttonRow)}>
+          <Button>Solid</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button disabled>Disabled</Button>
+        </div>
 
         <p {...stylex.props(styles.note)}>
           <code {...stylex.props(styles.code)}>pages/*.server.ts</code>、{' '}
