@@ -61,7 +61,6 @@ export default function HomePage() {
   const [prompts, setPrompts] = useState<Record<LaneId, string>>(
     () => Object.fromEntries(LANES.map((l) => [l.id, ''])) as Record<LaneId, string>,
   );
-
   const handleFile = (file: File | null) => {
     if (file && !file.type.startsWith('image/')) return;
     if (image) URL.revokeObjectURL(image.url);

@@ -8,6 +8,8 @@ export type SelectedImage = { file: File; url: string };
 type Props = {
   image: SelectedImage | null;
   onFile: (file: File | null) => void;
+  /** 同じ画像の再解析。バックエンド仕様が決まるまで未接続 */
+  onRetry?: () => void;
 };
 
 const PC_MEDIA = '@media (min-width: 768px)';
@@ -92,6 +94,12 @@ const styles = stylex.create({
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
   },
+  fileActions: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px',
+    flexShrink: 0,
+  },
 });
 
 const formatBytes = (bytes: number) => {
@@ -100,7 +108,7 @@ const formatBytes = (bytes: number) => {
   return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 };
 
-export function ImageInputPanel({ image, onFile }: Props) {
+export function ImageInputPanel({ image, onFile, onRetry }: Props) {
   const [dragOver, setDragOver] = useState(false);
 
   return (
@@ -114,9 +122,14 @@ export function ImageInputPanel({ image, onFile }: Props) {
             <span {...stylex.props(styles.fileName)}>
               {image.file.name} ({formatBytes(image.file.size)})
             </span>
-            <Button variant="ghost" onClick={() => onFile(null)}>
-              クリア
-            </Button>
+            <span {...stylex.props(styles.fileActions)}>
+              <Button variant="outline" onClick={() => onRetry?.()}>
+                もう一度
+              </Button>
+              <Button variant="ghost" onClick={() => onFile(null)}>
+                クリア
+              </Button>
+            </span>
           </div>
         </>
       ) : (
