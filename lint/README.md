@@ -19,9 +19,11 @@ lint/
 
 ## ルールの登録
 
+oxlint は同名プラグインを複数登録できないため、`lint/index.mjs` の集約プラグインに rules をマージしてから `lint.rules` で有効化する。
+
 ```ts [vite.config.ts]
 lint: {
-  jsPlugins: ['./lint/no-page-fetch/index.mjs', './lint/<rule-name>/index.mjs'],
+  jsPlugins: ['./lint/index.mjs'],
   rules: {
     'local/no-page-fetch': 'error',
     'local/<rule-name>': 'error',

@@ -1,0 +1,6 @@
+{
+  "1g0fnig4r2k": {
+    "reason": "equivalent: '' fallback for missing filename — 'Stryker was here!' never matches APP_DIR or any cwd prefix, so rel fails the scope check identically",
+    "where": "lint/naming-convention/index.mjs:24:97 '' -> 'Stryker was here!'"
+  }
+}

@@ -59,11 +59,14 @@ export default defineConfig({
       '.windsurf/**',
       'skills/**',
     ],
-    plugins: ['typescript', 'unicorn', 'oxc', 'import'],
-    jsPlugins: ['./lint/no-page-fetch/index.mjs'],
+    plugins: ['typescript', 'unicorn', 'oxc', 'import', 'react'],
+    jsPlugins: ['./lint/index.mjs'],
     rules: {
       'local/no-page-fetch': 'error',
+      'local/naming-convention': 'error',
       'import/no-relative-parent-imports': 'error',
+      'max-lines': ['error', 250],
+      'react/no-multi-comp': 'error',
     },
     overrides: [
       {
