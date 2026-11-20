@@ -98,6 +98,6 @@ export default defineConfig({
   },
   plugins: [voidPlugin(), stylex.vite(), voidReact({ react: { compiler: true } })],
   server: {
-    allowedHosts: ['vite.bo-yakitarako.dev'],
+    allowedHosts: ['vite.bo-yakitarako.dev', 'card-ocr.bo-yakitarako.dev'],
   },
 });
