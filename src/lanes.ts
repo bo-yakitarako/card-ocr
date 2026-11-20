@@ -27,7 +27,7 @@ export const LANE_CATEGORY_LABEL: Record<LaneCategory, string> = {
   C: 'API OCR',
 };
 
-export const LANES: readonly Lane[] = [
+const LANES: readonly Lane[] = [
   {
     id: 'A',
     category: 'A',
@@ -77,6 +77,8 @@ export const LANES: readonly Lane[] = [
     implemented: false,
   },
 ];
+
+export const LANE_IDS = LANES.map((lane) => lane.id) as [LaneId, ...LaneId[]];
 
 export const C_LANES = LANES.filter((lane) => lane.category === 'C');
 

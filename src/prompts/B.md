@@ -1,0 +1,5 @@
+このレーンではクライアント側OCR（WASM）が抽出したテキストspanと座標をもとに、カード情報を構造化します。
+
+各spanがカードのどのフィールドに対応するか判定してください（name / hp / attack_name / attack_cost / damage / effect / flavor / card_number / set / illustrator / other）。座標の位置関係（上部中央はカード名、右上はHPなど）も判断材料にしてください。
+
+タイプ・弱点・にげるコスト・レギュレーションマークはアイコンなのでOCRできません。添付のカード画像を見て判定してください。

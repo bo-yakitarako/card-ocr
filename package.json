@@ -22,7 +22,8 @@
     "@stylexjs/stylex": "^0.19.1",
     "hono": "^4.11.9",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "valibot": "^1.5.0"
   },
   "devDependencies": {
     "@agentclientprotocol/codex-acp": "^2.6.0",
@@ -43,7 +44,6 @@
     "typescript": "^7.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:",
-    "void": "1.9.1",
-    "zod": "^4.1.8"
+    "void": "1.9.1"
   }
 }

@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { ImageInputPanel, type SelectedImage } from '@/components/ImageInputPanel';
 import { LaneFooter } from '@/components/LaneFooter';
 import { OutputPanel } from '@/components/OutputPanel';
-import { LANE_BY_ID, LANES, type LaneCategory, type LaneId } from '@/lanes';
+import { LANE_BY_ID, type LaneCategory, type LaneId } from '@/lanes';
+import type { LanePrompts } from '@/server/prompts';
 import '@/styles.css';
 
 const PC_MEDIA = '@media (min-width: 768px)';
@@ -54,13 +55,13 @@ const styles = stylex.create({
   },
 });
 
-export default function HomePage() {
+// pages/ 内の相対importはlint禁止のため、Propsは './index.server' ではなく
+// 共有側の LanePrompts で直接注釈する（loader返り値 { prompts } と一致）。
+export default function HomePage({ prompts: initialPrompts }: { prompts: LanePrompts }) {
   const [image, setImage] = useState<SelectedImage | null>(null);
   const [lane, setLane] = useState<LaneCategory>('B');
   const [cModel, setCModel] = useState<LaneId>('C-1');
-  const [prompts, setPrompts] = useState<Record<LaneId, string>>(
-    () => Object.fromEntries(LANES.map((l) => [l.id, ''])) as Record<LaneId, string>,
-  );
+  const [prompts, setPrompts] = useState(initialPrompts);
   const handleFile = (file: File | null) => {
     if (file && !file.type.startsWith('image/')) return;
     if (image) URL.revokeObjectURL(image.url);
