@@ -37,6 +37,7 @@
     "ai": "^7.0.0",
     "e2e": "0.23.0",
     "fallow": "^3.43.1",
+    "oxc-transform-react": "~0.156.0",
     "react-doctor": "0.9.22",
     "tsrs": "0.24.0-ts7.1.0-beta",
     "typescript": "^7.0.2",

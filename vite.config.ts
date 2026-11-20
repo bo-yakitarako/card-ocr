@@ -76,13 +76,27 @@ export default defineConfig({
             'error',
             {
               patterns: ['./**', '../**'],
+              // React Compiler 有効化に伴い手動メモ化 API を禁止（改名 import も検出）
+              paths: [
+                {
+                  name: 'react',
+                  importNames: ['useMemo', 'useCallback', 'memo'],
+                  message: 'React Compiler memoizes automatically; write plain code instead.',
+                },
+              ],
             },
+          ],
+          'no-restricted-properties': [
+            'error',
+            { object: 'React', property: 'memo' },
+            { object: 'React', property: 'useMemo' },
+            { object: 'React', property: 'useCallback' },
           ],
         },
       },
     ],
   },
-  plugins: [voidPlugin(), stylex.vite(), voidReact()],
+  plugins: [voidPlugin(), stylex.vite(), voidReact({ react: { compiler: true } })],
   server: {
     allowedHosts: ['vite.bo-yakitarako.dev'],
   },
